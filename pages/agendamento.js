@@ -1,5 +1,5 @@
 
-export default function Agendamento() {
+export default function Scheduling() {
     return (
       <div>
         Agendamento

@@ -1,5 +1,5 @@
 
-export default function Agenda() {
+export default function Schedule() {
     return (
       <div>
         Agenda

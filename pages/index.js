@@ -1,7 +1,8 @@
 /* eslint-disable react/no-children-prop */
+import Link from 'next/link'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import firebase from './../config/firebase';
+import { firebaseClient as firebase } from './../config/firebase';
 
 //Componentes Chackra
 import {
@@ -12,26 +13,29 @@ import {
   Text,
   FormControl,
   FormLabel,
-  FormHelperText,
-  InputGroup,
-  InputLeftAddon
+  FormHelperText
 
 } from '@chakra-ui/react';
 
 //Logo
 import Logo from '../components/Logo';
 
-export default function Home() {
+export default function Signin() {
   const validationSchema = yup.object().shape({
     email: yup.string().email('E-mail inválido!').required('Preenchimento obrigatório!'),
-    password: yup.string().required('Preenchimento obrigatório!'),
-    username: yup.string().required('Preenchimento obrigatório!')
+    password: yup.string().required('Preenchimento obrigatório!')
   });
 
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = useFormik({
-    onSubmit: (values, form) => {
-      console.log(values)
+    onSubmit: async (values, form) => {
+      try {
+        const user = await firebase.auth().signInWithEmailAndPassword(values.email, values.password)
+        console.log(user)
+      } catch (error) {
+        console.log(error)
+      }
+
     },
     validationSchema,
     initialValues: {
@@ -46,10 +50,10 @@ export default function Home() {
     <Container p={4} centerContent >
       <Logo />
       <Box p={4} mt={8}>
-        <Text>Crie sua agenda compartilhada</Text>
+        <Text>Veja sua agenda compartilhada</Text>
       </Box>
 
-      <Box>
+      <Box w="80%">
         <FormControl id="email" p={4} isRequired>
           <FormLabel>Email </FormLabel>
           <Input
@@ -78,24 +82,6 @@ export default function Home() {
           }
         </FormControl>
 
-        <Box display="flex" flexDirection="row" alignItems="center" p={4}>
-          <InputGroup size="lg" >
-            <InputLeftAddon children="clocker.work/" />
-            <FormControl id="username" isRequired>
-              <Input
-                type="username"
-                value={values.username}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                size="lg"
-              />
-              {touched.username &&
-                <FormHelperText textColor="#e74c3c">{errors.username}</FormHelperText>
-              }
-            </FormControl>
-          </InputGroup>
-        </Box>
-
         <Box p={4}>
           <Button 
             width="100%"
@@ -108,6 +94,8 @@ export default function Home() {
           </Button>
         </Box>
       </Box>
+
+      <Link href="/cadastro">Ainda não possui uma conta? Cadastre-se aqui.</Link>
     </Container>
   )
 }
