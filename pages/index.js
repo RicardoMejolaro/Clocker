@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { firebaseClient as firebase } from './../config/firebase';
+import { firebaseClient as firebase, persistenceMode } from './../config/firebase';
 
 //Componentes Chackra
 import {
@@ -19,6 +19,7 @@ import {
 
 //Logo
 import Logo from '../components/Logo';
+import { useEffect } from 'react';
 
 export default function Signin() {
   const validationSchema = yup.object().shape({
@@ -29,6 +30,7 @@ export default function Signin() {
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = useFormik({
     onSubmit: async (values, form) => {
+      firebase.auth().setPersistence(persistenceMode)
       try {
         const user = await firebase.auth().signInWithEmailAndPassword(values.email, values.password)
         console.log(user)
@@ -44,8 +46,6 @@ export default function Signin() {
       username: ''
     }
   })
-
-
   return (
     <Container p={4} centerContent >
       <Logo />
