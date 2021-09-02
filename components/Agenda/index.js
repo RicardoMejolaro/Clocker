@@ -1,5 +1,5 @@
 
-import firebaseClient from '../../config/firebase/client';
+import { firebaseClient as firebase } from '../../config/firebase/client';
 
 //Componentes Chakra UI
 import { Button } from '@chakra-ui/react';
