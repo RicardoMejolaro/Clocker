@@ -2,16 +2,16 @@ import firebaseServer from 'firebase-admin';
 
 const serverFirebaseConfig = {
   credential: admin.credential.cert({
-    type: process.env.NEXT_PUBLIC_TYPE,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    privateKeyId: process.env.NEXT_PUBLIC_PRIVATE_KEY_ID,
-    clientEmail: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
-    privateKey: process.env.NEXT_PUBLIC_PRIVATE_KEY,
-    authUri: process.env.NEXT_PUBLIC_AUTH_URI,
-    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-    authProviderX509CertUrl: process.env.NEXT_PUBLIC_AUTH_PROVIDER_X509_CERT_URL,
-    tokenUri: process.env.NEXT_PUBLIC_TOKEN_URI,
-    clientX509CertUrl: process.env.NEXT_PUBLIC_CLIENT_X509_CERT_URL
+    type: process.env.TYPE,
+    project_id: process.env.NEXT_PUBLIC_PROJECT_ID,
+    private_key_id: process.env.PRIVATE_KEY_ID,
+    client_email: process.env.CLIENT_EMAIL,
+    private_key: process.env.PRIVATE_KEY,
+    auth_uri: process.env.AUTH_URI,
+    client_id: process.env.CLIENT_ID,
+    auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
+    token_uri: process.env.TOKEN_URI,
+    client_x509_cert_url: process.env.CLIENT_X509_CERT_URL
   })
 };
 
