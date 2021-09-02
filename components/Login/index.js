@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { firebaseClient as firebase, persistenceMode } from '../../config/firebase';
+import firebaseClient, { persistenceMode } from '../../config/firebase/client';
 
 //Componentes Chackra
 import {
@@ -29,9 +29,9 @@ export default function Signin() {
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting } = useFormik({
     onSubmit: async (values, form) => {
-      firebase.auth().setPersistence(persistenceMode)
+      firebaseClient.auth().setPersistence(persistenceMode)
       try {
-        const user = await firebase.auth().signInWithEmailAndPassword(values.email, values.password)
+        const user = await firebaseClient.auth().signInWithEmailAndPassword(values.email, values.password)
         console.log(user)
       } catch (error) {
         console.log(error)
