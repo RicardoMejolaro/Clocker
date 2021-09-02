@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { firebaseClient as firebase} from '../config/firebase';
+import { firebaseClient as firebase} from '../config/firebase/client';
 
 //Componentes Chacra UI
 import { Spinner, Container } from '@chakra-ui/react';
